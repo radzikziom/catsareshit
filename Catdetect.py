@@ -39,9 +39,9 @@ def replaceChar(source):
     path = source.replace("\\", "/")
     return path
 
-
+path = "images\cat_1.jpg"
 def main(path):
-    #path = "images\cat_1.jpg"
+
     rawPathToImage = replaceChar(path)
     image = cv2.imread(rawPathToImage)
     cats = Process_image(image)

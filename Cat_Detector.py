@@ -1,5 +1,5 @@
 # importowanie OpenCV
-import cv2              # pip install opencv-python
+import cv2  # pip install opencv-python
 
 # string ze ścieżką do pliku konfiguracyjnego XML
 # jeśli jest w głównym folderze to po prostu nazwa pliku
@@ -28,18 +28,24 @@ def is_cat(cats):
         return output
 
 
-# ścieżka do obrazka ZAPISANEGO na serwerze
-path = "path"
+def replaceChar(source):
+    path = source.replace("\\", "/")
+    return path
 
-"""
-zamiana \ ze ścieżki na / obsługiwane przez Pythona
-w sumie lepiej jakby zrobić to po stronie serwera przed przekazaniem adresu 
-"""
-rawPathToImage = path.replace("\\", "/")
-# OpenCV wczytuje obrazek
-image = cv2.imread(rawPathToImage)
-# Rozpoznanie obrazka -> cats przechowuje zwracaną listę tupli
-cats = Process_image(image)
-# Sprawdzamy czy zostało coś wpisane do listy i zwracamy wynik do serwera
-result = is_cat(cats)
-# result przechowuje wynik analizy zdjęcia
+
+# ścieżka do obrazka ZAPISANEGO na serwerze
+# path = "path"
+def main(path):
+    """
+    zamiana \ ze ścieżki na / obsługiwane przez Pythona
+    w sumie lepiej jakby zrobić to po stronie serwera przed przekazaniem adresu
+    """
+    rawPathToImage = replaceChar(path)
+    # OpenCV wczytuje obrazek
+    image = cv2.imread(rawPathToImage)
+    # Rozpoznanie obrazka -> cats przechowuje zwracaną listę tupli
+    cats = Process_image(image)
+    # Sprawdzamy czy zostało coś wpisane do listy i zwracamy wynik do serwera
+    result = is_cat(cats)
+    # result przechowuje wynik analizy zdjęcia
+    return result
